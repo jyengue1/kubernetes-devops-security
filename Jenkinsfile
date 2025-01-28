@@ -19,5 +19,11 @@ pipeline {
               }
             }
         }
+      stage('Docker Build and Push') {
+            steps {
+              sh 'docker build -t jyengue1/numeric-app:""$GIT_COMMIT"" .'
+              archive 'docker push jyengue1/numeric-app:""$GIT_COMMIT""'
+            }
+      }
     }
 }
