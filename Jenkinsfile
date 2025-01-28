@@ -21,8 +21,10 @@ pipeline {
         }
       stage('Docker Build and Push') {
             steps {
+              withDockerRegistry([credentialsId: "docker-hub", url:""]) {
               sh 'docker build -t jyengue1/numeric-app:""$GIT_COMMIT"" .'
-              archive 'docker push jyengue1/numeric-app:""$GIT_COMMIT""'
+              sh 'docker push jyengue1/numeric-app:""$GIT_COMMIT""'
+              }
             }
       }
     }
